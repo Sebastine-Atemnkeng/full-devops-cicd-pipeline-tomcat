@@ -3,13 +3,13 @@
 
 # Jenkins Complete CI/CD Pipeline Environment Setup 
 
-1) Create a GitHub Repository name `Jenkins-CICD-Pipeline-Project` and push the code in this branch(main) to 
-    your remote repository (your newly created repository).
+1) Create a GitHub Repository `Jenkins-CICD-Pipeline-Project` and push the code in this branch(main) to 
+    your remote repository (your newly created repository). 
     - Go to GitHub (github.com)
     - Login to your GitHub Account
     - Create a Repository called "Jenkins-CICD-Project"
     - Clone the Repository in the "Repository" directory/folder in your local
-    - Download the code in in this repository "Main branch": https://github.com/awanmbandi/eagles-batch-devops-projects.git
+    - Download the code in in this repository "Main branch": https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat
     - Unzip the code/zipped file
     - Copy and Paste everything from the zipped file into the repository you cloned in your local
     - Add the code to git, commit and push it to your upstream branch "main or master"
@@ -20,7 +20,7 @@
     - Instance type: t2.medium
     - Security Group (Open): 8080, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
+    - User data (Copy the following user data): https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
     - Launch Instance
 
 3) SonarQube
@@ -28,7 +28,7 @@
     - Instance type: t2.medium
     - Security Group (Open): 9000, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
+    - User data (Copy the following user data): https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
     - Launch Instance
 
 4) Nexus
@@ -36,7 +36,7 @@
     - Instance type: t2.medium
     - Security Group (Open): 8081, 9100 and 22 to 0.0.0.0/0
     - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
+    - User data (Copy the following user data): https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
     - Launch Instance
 
 5) EC2 (Dev/Stage/Prod)
@@ -61,11 +61,11 @@
 
 8) Slack 
     - Go to the bellow Workspace and create a Private Slack Channel and name it "yourfirstname-jenkins-cicd-pipeline-alerts"
-    - Link: https://join.slack.com/t/jjtech-eagles-cicd/shared_invite/zt-1go3k7pz7-uSy3D4ai3Pb7KJk2G1sc1g 
+    - Link: https://app.slack.com/client/T043JRQBB5L/C044F5PH3DE 
 
 9) Configure Promitheus
     - Login/SSH to your Prometheus Server
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
+    - Clone the following repository: https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/prometheus-and-grafana
     - Change directory to "eagles-batch-devops-projects"
     - Swtitch to the "prometheus-and-grafana" git branch  
     - Run: ./install-prometheus.sh
@@ -74,7 +74,7 @@
 
 10) Configure Grafana
     - Login/SSH to your Grafana Server
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
+    - Clone the following repository: https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/prometheus-and-grafana
     - Change directory to "eagles-batch-devops-projects"
     - Swtitch to the "prometheus-and-grafana" git branch 
     - Run: ls or ll  (to confirm you have the branch files)
@@ -86,7 +86,7 @@
     - Login/SSH into the "Dev-Env", "Stage-Env" and "Prod-Env" VM instance
     - Perform the following operations on all of them
     - Install git by running: sudo yum install git -y 
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
+    - Clone the following repository: https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/prometheus-and-grafana
     - Change directory to "eagles-batch-devops-projects"
     - Swtitch to the "prometheus-and-grafana" git branch 
     - Run: ls or ll  (to confirm you have the branch files)
@@ -102,7 +102,7 @@
     - Login/SSH into the "Jenkins-Maven-Ansible", "Nexus" and "SonarQube" VM instance
     - Perform the following operations on all of them
     - Install git by running: sudo yum install git -y    (The SonarQube server already has git)
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
+    - Clone the following repository:https://github.com/sebastine01/full-devops-cicd-pipeline-tomcat/tree/prometheus-and-grafana
     - Change directory to "eagles-batch-devops-projects"
     - Swtitch to the "prometheus-and-grafana" git branch 
     - Run: ls or ll  (to confirm you have the branch files including "install-node-exporter.sh")
