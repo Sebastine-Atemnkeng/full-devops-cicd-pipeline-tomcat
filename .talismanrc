@@ -1,8 +1,10 @@
 fileignoreconfig:
-- filename: pipeline-env-requirements.md
-  checksum: 9a104aab1c28e9e17bd9b0cda5e54b92a8b51e84e0dbc908c71cbcf3718f50ab
-- filename: Jenkinsfile
-  checksum: bed626642e6a2a566b84ca5253ff35d9b5a1a78bb4ea87e13a03352a35f042f9
+- filename: settings.xml
+  checksum: 96fc7cf8e3d9856d4d52785d3e5d037da78236781e19a73a6e2452fed2580d2f
+- filename: JavaWebApp/.mvn/wrapper/MavenWrapperDownloader.java
+  checksum: df4136d4e93f6735eaf49488de933bebaf4ce8b12d7a99a2aef8446bedba69d1
+- filename: JavaWebApp/mvnw
+  checksum: 599562ecabb996ff6a05c564d8405d584db4210cd884dfd1c6610f06a6a3bb75
 - filename: README.md
-  checksum: d1acd8d010a45360be2fe8674ed3b65aea31c3d56119684613b0649880a550a5
+  checksum: af89854a8489a24640fa63609df36fbe730beb48f034708dda9e26fe10246b34
 version: ""

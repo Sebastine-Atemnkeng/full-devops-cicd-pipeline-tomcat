@@ -1,186 +1,56 @@
-# Jenkins CI/CD Pipeline Project Architecture (Java Web Application)
-![CompleteCICDProject!](https://lucid.app/publicSegments/view/a6ef3233-7dda-483a-a662-d8ec90395ba3/image.png)
+## Install Nexus Repository Manager
+- https://github.com/awanmbandi/maven-nexus-project-eagles-batch/blob/maven-nexus-install/nexus-install.sh
 
-# Jenkins Complete CI/CD Pipeline Environment Setup 
+## Install Apache Maven
+- https://github.com/awanmbandi/maven-nexus-project-eagles-batch/blob/maven-nexus-install/maven-install.md
 
-1) Create a GitHub Repository `Jenkins-CICD-Pipeline-Project` and push the code in this branch(main) to 
-    your remote repository (your newly created repository). 
-    - Go to GitHub (github.com)
-    - Login to your GitHub Account
-    - Create a Repository called "Jenkins-CICD-Project"
-    - Clone the Repository in the "Repository" directory/folder in your local
-    - Download the code in in this repository "Main branch": https://github.com/awanmbandi/eagles-batch-devops-projects.git
-    - Unzip the code/zipped file
-    - Copy and Paste everything from the zipped file into the repository you cloned in your local
-    - Add the code to git, commit and push it to your upstream branch "main or master"
-    - Confirm that the code exist on GitHub
+## Install SonarQube
+- https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
 
-2) Jenkins/Maven/Ansible
-    - Create an Amazon Linux 2 VM instance and call it "jenkins-maven-ansible"
-    - Instance type: t2.medium
-    - Security Group (Open): 8080, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/jenkins-install.sh
-    - Launch Instance
+## Configure Nexus Repository
+Series of tutorial code snippets for use
+#Maven publish tutorial steps
+Publishing artifact to Nexus snapshot and release repo using maven.
 
-3) SonarQube
-    - Create an Create an Ubuntu 18.04 VM instance and call it "SonarQube"
-    - Instance type: t2.medium
-    - Security Group (Open): 9000, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/sonarqube-install.sh
-    - Launch Instance
+1. Create a snapshot repo using nexus, or use default coming in out of the box. DEFAULT 
+2. Create a release repo using nexus, or use default coming out of the box. DEFAULT
+3. Create a group repo having both release, snapshot and other third party repos. or use default coming out of the box.
+4. Download spring initializer project
+5. Go settings.xml under <MAVEN_INSTALL_LOCATION>\apache-maven-3.6.0\conf or C:\Users\<USER_NAME>\.m2  or mkdir ~/.m2
+6. Create/Move profiles named snapshot and release in settings.xml in `~/.m2` (can be done in pom.xml as well)
+7. Add server user name and pwd in setting.xml (Encrypted recommended).
+8. Edit pom.xml and add repository and snapshot repository in distribution management tag DEFAULT/DONE
+9. Mark id should match in step 7 with server id of settings.xml, UPDATE NEXUS IP
+10. Run the following `maven`/`mvn` commands to validate/package/deploy your app artifacts remotely
+   - `mvn validate`   (validate the project is correct and all necessary information is available.)
+   - `mvn compile`    (compile the source code of the project)
+   - `mvn test`       (run tests using a suitable unit testing framework. These tests should not require the code be packaged or deployed.)
+   - `mvn package`    (take the compiled code and package it in its distributable format, such as a WAR/JAR/EAR.)
+   - `mvn verify`     (run any checks to verify the package is valid and meets quality criteria.)
+   - `mvn install`    (install the package into the local repository, for use as a dependency in other projects locally.)
+   - `mvn deploy`     (done in an integration or release environment, copies the final package to the remote/SNAPSHOT repository 
+                      for sharing with other developers and projects.)
 
-4) Nexus
-    - Create an Amazon Linux 2 VM instance and call it "Nexus"
-    - Instance type: t2.medium
-    - Security Group (Open): 8081, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - User data (Copy the following user data): https://github.com/awanmbandi/eagles-batch-devops-projects/blob/maven-nexus-sonarqube-jenkins-install/nexus-install.sh
-    - Launch Instance
+11. Change the version from 1.0-Snapshot to 1.0
+12. Run `mvn deploy` to deploy to Snapshot Repo or `mvn clean deploy -P release`, to deploy it to Release Repo
 
-5) EC2 (Dev/Stage/Prod)
-    - Create 3 Amazon Linux 2 VM instance and call them (Names: Dev-Env, Stage-Env and Prod-Env)
-    - Instance type: t2.micro
-    - Security Group (Open): 8080, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
+## Maven Lifecycle Phases
+- https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#a-build-lifecycle-is-made-up-of-phases
 
-6) Prometheus
-    - Create an Ubuntu 20.04 VM instance and call it "Prometheus"
-    - Instance type: t2.micro
-    - Security Group (Open): 9090 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - Launch Instance
+## Maven + SonarQube 
+mvn clean sonar:sonar \
+  -Dsonar.projectKey=JavaWebApp \
+  -Dsonar.host.url=http://44.203.4.255:9000 \
+  -Dsonar.login=<sonarqube prject token>
 
-7) Grafana
-    - Create an Ubuntu 20.04 VM instance and call it "Grafana"
-    - Instance type: t2.micro
-    - Security Group (Open): 3000 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - Launch Instance
+## Before Running the `deploy` Command make sure to update the Nexus pom.xml and settings.xml with Nexus IP addedd, Username and Password. Make sure the plugings are defined as well
+mvn clean package sonar:sonar \
+  -Dsonar.projectKey=JavaWebApp-Project3 \
+  -Dsonar.host.url=http://44.203.4.255:9000 \
+  -Dsonar.login=<sonarqube prject token>
 
-8) Slack 
-    - Go to the bellow Workspace and create a Private Slack Channel and name it "yourfirstname-jenkins-cicd-pipeline-alerts"
-    - Link: https://app.slack.com/client/T043JRQBB5L/C044F5PH3DE 
-
-9) Configure Promitheus
-    - Login/SSH to your Prometheus Server
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
-    - Change directory to "eagles-batch-devops-projects"
-    - Swtitch to the "prometheus-and-grafana" git branch  
-    - Run: ./install-prometheus.sh
-    - Confirm the status shows "Active (running)"
-    - Exit
-
-10) Configure Grafana
-    - Login/SSH to your Grafana Server
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
-    - Change directory to "eagles-batch-devops-projects"
-    - Swtitch to the "prometheus-and-grafana" git branch 
-    - Run: ls or ll  (to confirm you have the branch files)
-    - Run: ./install-grafana.sh
-    - Confirm the status shows "Active (running)"
-    - Exit
-
-11) Configure The "Node Exporter" accross the "Dev", "Stage" and "Prod" instances including your "Pipeline Infra"
-    - Login/SSH into the "Dev-Env", "Stage-Env" and "Prod-Env" VM instance
-    - Perform the following operations on all of them
-    - Install git by running: sudo yum install git -y 
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
-    - Change directory to "eagles-batch-devops-projects"
-    - Swtitch to the "prometheus-and-grafana" git branch 
-    - Run: ls or ll  (to confirm you have the branch files)
-    - Run: ./install-node-exporter.sh
-    - Confirm the status shows "Active (running)"
-    - Access the Node Exporters running on port "9100", open your browser and run the below
-        - Dev-EnvPublicIPaddress:9100   (Confirm this page is accessible)
-        - Stage-EnvPublicIPaddress:9100   (Confirm this page is accessible)
-        - Prod-EnvPublicIPaddress:9100   (Confirm this page is accessible)
-    - Exit
-
-12) Configure The "Node Exporter" on the "Jenkins-Maven-Ansible", "Nexus" and "SonarQube" instances 
-    - Login/SSH into the "Jenkins-Maven-Ansible", "Nexus" and "SonarQube" VM instance
-    - Perform the following operations on all of them
-    - Install git by running: sudo yum install git -y    (The SonarQube server already has git)
-    - Clone the following repository: https://github.com/awanmbandi/eagles-batch-devops-projects.git
-    - Change directory to "eagles-batch-devops-projects"
-    - Swtitch to the "prometheus-and-grafana" git branch 
-    - Run: ls or ll  (to confirm you have the branch files including "install-node-exporter.sh")
-    - Run: ./install-node-exporter.sh
-    - Make sure the status shows "Active (running)"
-    - Access the Node Exporters running on port "9100", open your browser and run the below
-        - Jenkins-Maven-AnsiblePublicIPaddress:9100   (Confirm the pages are accessible)
-        - NexusPublicIPaddress:9100   
-        - SonarQubePublicIPaddress:9100   
-    - Exit
-
-13) Update the Prometheus config file and include all the IP Addresses of the Pipeline Instances that are 
-    running the Node Exporter API. That'll include ("Dev", "Stage", "Prod", "Jenkins-Maven-Ansible", "Nexus" and "SonarQube")
-    - SSH into the Prometheus instance either using your GitBash (Windows) or Terminal (macOS) or browser
-    - Run the command: sudo vi /etc/prometheus/prometheus.yml
-        - Navigate to "- targets: ['localhost:9090']" and add the "IPAddress:9100" for all the above Pipeline instances. Ecample "- targets: ['localhost:9090', 'DevIPAddress:9100', 'StageIPAddress:9100', 'ProdIPAddress:9100', 'Jenkins-Maven-AnsibleIPAddress:9100'] ETC..."
-        - Save the Config File and Quit
-    - Open a TAB on your choice browser
-    - Copy the Prometheus PublicIP Addres and paste on the browser/tab with port 9100 e.g "PrometheusPublicIPAddres:9100"
-        - Once you get to the Prometheus Dashboard Click on "Status" and Click on "Targets"
-    - Confirm that Prometheus is able to reach everyone of your Nodes, do this by confirming the Status "UP" (green)
-    - Done
-
-14) Open a New Tab on your browser for Grafana also if you've not done so already. 
-    - Copy your Grafana Instance Public IP and put on the browser with port 3000 e.g "GrafanaPublic:3000"
-    - Once the UI Opens pass the following username and password
-        - Username: admin
-        - Password: admin
-        - New Username: admin
-        - New Password: admin
-        - Save and Continue
-    - Once you get into Grafana, follow the below steps to Import a Dashboard into Grafana to visualize your Infrastructure/App Metrics
-        - Click on "Configuration/Settings" on your left
-        - Click on "Data Sources"
-        - Click on "Add Data Source"
-        - Select Prometheus
-        - Underneath HTTP URL: http://PrometheusPublicOrPrivateIPaddress:9090
-        - Click on "SAVE and TEST"
-    - Navigate to "Create" on your left (the `+` sign)
-        - Click on "Import"
-        - Copy the following link: https://grafana.com/grafana/dashboards/1860
-        - Paste the above link where you have "Import Via Grafana.com"
-        - Click on Load (The one right beside the link you just pasted)
-        - Scrol down to "Prometheus" and select the "Data Source" you defined ealier which is "Prometheus"
-        - CLICK on "Import"
-    - Refresh your Grafana Dashbaord 
-        - Click on the "Drop Down" for "Host" and select any of the "Instances(IP)"
-
-15) Update Your Jenkins file with your Slack Channel Name
-    - Go back to your local, open your "Jenkins-CICD-Project" repo/folder/directory on VSCODE
-    - Open your "Jenkinsfile"
-    - Update the slack channel name on line "97"
-    - Change name from "jenkins-cicd-pipeline-alerts" to yours
-    - Add the changes to git, commit and push to GitHub
-    - Confirm the changes reflects on GitHub
-
-16) Copy your Jenkins Public IP Address and paste on the browser = ExternalIP:8080
-    - Login to your Jenkins instance using your Shell (GitBash or your Mac Terminal)
-    - Copy the Path from the Jenkins UI to get the Administrator Password
-        - Run: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
-        - Copy the password and login to Jenkins
-    - Plugins: Choose Install Suggested Plugings 
-    - Provide 
-        - Username: admin
-        - Password: admin
-        - Name and Email can also be admin. You can use `admin` all through as we
-    - Continue and Start using Jenkins
-
-17) Once on the Jenkins Dashboard
-    - Click on "Manage Jenkins"
-    - Click on "Plugin Manager"
-    - Click "Available"
-    - Search and Install the following Plugings "Install Without Restart"
-        - SonnarQube Scanner
-        - Maven Integration
-        - Pipeline Maven Integration
-        - Maven Release Plug-In
-        - Slack Notification
-    - Install all plugings without restart 
-
-18) Confirm and make test your installations/setups  
+## Clean, Build, Test and Deploy(to Nexus)
+mvn clean package sonar:sonar deploy \
+  -Dsonar.projectKey=JavaWebApp-Project3 \
+  -Dsonar.host.url=http://44.203.4.255:9000 \
+  -Dsonar.login=<sonarqube prject token>
