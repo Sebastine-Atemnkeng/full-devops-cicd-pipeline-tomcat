@@ -1,10 +1,4 @@
 fileignoreconfig:
-- filename: pipeline-env-requirements.md
-  checksum: 9a104aab1c28e9e17bd9b0cda5e54b92a8b51e84e0dbc908c71cbcf3718f50ab
-- filename: Jenkinsfile
-  checksum: bed626642e6a2a566b84ca5253ff35d9b5a1a78bb4ea87e13a03352a35f042f9
-- filename: README.md
-  checksum: d1acd8d010a45360be2fe8674ed3b65aea31c3d56119684613b0649880a550a5
 - filename: README.md
   checksum: f37296702ceb8d8e348ae2dbeb7241348e72bb734625880877ab1c08160925aa
 version: ""
