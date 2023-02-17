@@ -1,6 +1,8 @@
 fileignoreconfig:
-- filename: prometheus_serviceDiscovery.yml
-  checksum: 4506ddc615cf34042c2ff5cb651fc340a5f890ed22e7a7cc84ed15b967f0c11e
-- filename: prometheus_relabeeling.yml
-  checksum: 281b8e788735c94a01d71d1cdd16f859372379cdf48d940d39bebf78dd309d1a
+- filename: JavaWebApp/.mvn/wrapper/MavenWrapperDownloader.java
+  checksum: df4136d4e93f6735eaf49488de933bebaf4ce8b12d7a99a2aef8446bedba69d1
+- filename: settings.xml
+  checksum: 10b3305150dede748ec13e95f2086b38729615c6b6be8cd70996eb105fe13c82
+- filename: JavaWebApp/mvnw
+  checksum: 599562ecabb996ff6a05c564d8405d584db4210cd884dfd1c6610f06a6a3bb75
 version: ""
