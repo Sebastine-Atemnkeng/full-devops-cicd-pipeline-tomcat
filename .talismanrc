@@ -1,5 +1,6 @@
-
 fileignoreconfig:
-- filename: sonarqube-install.sh
-  checksum: 25313d9f4147f744dd2290b632313deb16c1cac79fdf2434e0b25ef4f66d01c2
+- filename: prometheus_serviceDiscovery.yml
+  checksum: 4506ddc615cf34042c2ff5cb651fc340a5f890ed22e7a7cc84ed15b967f0c11e
+- filename: prometheus_relabeeling.yml
+  checksum: 281b8e788735c94a01d71d1cdd16f859372379cdf48d940d39bebf78dd309d1a
 version: ""
