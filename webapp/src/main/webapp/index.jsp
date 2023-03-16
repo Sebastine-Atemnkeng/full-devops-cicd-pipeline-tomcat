@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <!-- <!DOCTYPE html>
+=======
+<!DOCTYPE html>
+>>>>>>> dd1ad615b148f7c3fa85533d401a2f65a2e2715a
 <html lang="en">
 <head>
 <title>Page Title</title>
@@ -9,7 +13,11 @@
 .header {
   padding: 80px;
   text-align: center;
+<<<<<<< HEAD
   background: #E97777;
+=======
+  background: #1a38bc;
+>>>>>>> dd1ad615b148f7c3fa85533d401a2f65a2e2715a
   color: white;
 }
 /* Increase the font size of the heading */
@@ -22,6 +30,7 @@
 <div class="header">
   <h1>Hello JJ Tech Family !!!</h1>
   <p>This Java Web Application Was Deployed Using CI/CD</p>
+<<<<<<< HEAD
   
 </div>
 </body>
@@ -175,3 +184,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 
 <!-- https://www.w3schools.com/w3css/tryw3css_templates_cv.htm -->
+=======
+</div>
+</body>
+</html>
+>>>>>>> dd1ad615b148f7c3fa85533d401a2f65a2e2715a

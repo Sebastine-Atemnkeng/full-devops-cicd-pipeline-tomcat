@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: pipeline-env-requirements.md
+  checksum: 44a0db23531fd4d934ca7f4a5957f67cc5c2a8500a18de17e680746477b76369
+version: ""
