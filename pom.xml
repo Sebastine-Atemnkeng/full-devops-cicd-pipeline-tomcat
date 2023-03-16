@@ -14,7 +14,7 @@
   <properties>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
-  </properties>      
+  </properties>       
          
   <modules>
     <module>server</module>
@@ -29,11 +29,11 @@
     </site>
     <snapshotRepository>
             <id>nexus</id>
-            <url>http://172.31.17.227:8081/repository/maven-snapshots/</url>          <!--Replace the Nexus Private IP in this line-->
+            <url>http://34.213.226.214:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>nexus</id>
-            <url>http://172.31.17.227:8081/repository/maven-releases/</url>           <!--Replace the Nexus Private IP in this line-->
+            <url>http://34.213.226.214:8081/repository/maven-releases/</url>
         </repository>
   </distributionManagement>
 
@@ -94,13 +94,6 @@
 
     <pluginManagement>
       <plugins>
-        <!--
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.2.0</version>
-        <plugin>
-        -->
-
         <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>2.8</version>
