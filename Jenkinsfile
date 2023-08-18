@@ -66,7 +66,7 @@ pipeline {
                         sh """
                     mvn sonar:sonar \
                     -Dsonar.projectKey=maven \
-                    -Dsonar.host.url=http://172.31.29.114:9000 \
+                    -Dsonar.host.url=http://10.0.0.158:9000 \
                     -Dsonar.login=$SONAR_TOKEN
                     """
                     }
@@ -98,7 +98,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'ansible-deploy-server-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-                    sh "ansible-playbook -i ${WORKSPACE}/ansible-setup/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
+                    sh "ansible dev_host -m copy -a 'src=/var/lib/jenkins/workspace/app-cicd-pipeline/webapp/target/webapp.war dest=/var/lib/tomcat/webapps owner=ansadmin group=ansadmin mode=0644'"
                 }
             }
         }
@@ -109,7 +109,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'ansible-deploy-server-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-                    sh "ansible-playbook -i ${WORKSPACE}/ansible-setup/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
+                    sh "ansible stage_host -m copy -a 'src=/var/lib/jenkins/workspace/app-cicd-pipeline/webapp/target/webapp.war dest=/var/lib/tomcat/webapps owner=ansadmin group=ansadmin mode=0644'"
                 }
             }
         }
@@ -126,7 +126,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'ansible-deploy-server-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-                    sh "ansible-playbook -i ${WORKSPACE}/ansible-setup/aws_ec2.yaml ${WORKSPACE}/deploy.yaml --extra-vars \"ansible_user=$USER_NAME ansible_password=$PASSWORD hosts=tag_Environment_$HOSTS workspace_path=$WORKSPACE\""
+                    sh "ansible prod_host -m copy -a 'src=/var/lib/jenkins/workspace/app-cicd-pipeline/webapp/target/webapp.war dest=/var/lib/tomcat/webapps owner=ansadmin group=ansadmin mode=0644'"
                 }
             }
         }
@@ -135,7 +135,7 @@ pipeline {
     post {
         always {
             echo 'I will always say Hello again!'
-            slackSend channel: '#cicd-pipeline', color: COLOR_MAP[currentBuild.currentResult], message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+            slackSend channel: 'cybergoat', color: COLOR_MAP[currentBuild.currentResult], message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }

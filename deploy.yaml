@@ -1,16 +1,15 @@
 - name: Ansible Copy Local to Remote
-  hosts: "{{hosts}}"
+  hosts: dev_server:stage_server:prod_server
+  become: true
   vars:
-    src_path: "{{ workspace_path }}/webapp/target/webapp.war"
-    dest_path: "/var/lib/tomcat/webapps"
-    config_file_src_path: "{{ hosts }}-config.yaml"
-    config_file_dest_path: "/home"
+    src_path: "/var/lib/jenkins/workspace/app-cicd-pipeline/webapp/target/webapp.war"
+    dest_path: "/var/lib/tomcat/webapps"  # Adjust this path to the parent directory
   tasks:
-    - name: copying file with playbook
-      become: true
-      copy:
+    - name: Copy the file to remote servers
+      ansible.builtin.copy:
         src: "{{ src_path }}"
-        dest: "{{ dest_path }}"
+        dest: "{{ dest_path }}/webapp.war"
         owner: ansadmin
         group: ansadmin
-        mode: 0644
+        mode: '0644'
+      register: copy_result
