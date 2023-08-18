@@ -1,4 +1,6 @@
 fileignoreconfig:
-- filename: pipeline-env-requirements.md
-  checksum: 44a0db23531fd4d934ca7f4a5957f67cc5c2a8500a18de17e680746477b76369
+- filename: nexus-setup/settings.xml
+  checksum: dfb86e61f2f430ec0e04b437b1354ede58c2bbf956fd7d8efe07f77a608749ed
+- filename: Jenkinsfile
+  checksum: 3b0ab8795ea4bd5f18f74ac31fa5c8e141a98e6524eb363336f41a326c6055cd
 version: ""
