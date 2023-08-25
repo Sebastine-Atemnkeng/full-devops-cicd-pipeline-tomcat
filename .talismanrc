@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: nexus-setup/settings.xml
-  checksum: dfb86e61f2f430ec0e04b437b1354ede58c2bbf956fd7d8efe07f77a608749ed
+  checksum: 7554844d982cc8483c32d10a2bfcf51d04e4b023f919f692cf3bfd550070629d
 - filename: Jenkinsfile
-  checksum: 3b0ab8795ea4bd5f18f74ac31fa5c8e141a98e6524eb363336f41a326c6055cd
+  checksum: 51669350db1b02ced8e523e351faf60eef0c9be5840f04fdc8fe1f35fb28d143
 version: ""
